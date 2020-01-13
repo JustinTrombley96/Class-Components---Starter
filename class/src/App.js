@@ -40,38 +40,61 @@ const groceries = [
 class App extends Component {
 	// Constructor with state
 	constructor () {
-    super();
-    // initialize the state object
-    this.state = {
-      groceryList: groceries
-    }
-  }
+		super();
+		// initialize the state object
+		this.state = {
+			groceryList : groceries,
+		};
+	}
 
+	//----------------------------------------------------
 
-//----------------------------------------------------
+	//Function Components with State
+	// const [name, setName] = useState('Dustin')
+	// const [hogwartsHouse, setHogwartsHouse] = useState('Gryffindor')
 
-  //Function Components with State
-  // const [name, setName] = useState('Dustin')
-  // const [hogwartsHouse, setHogwartsHouse] = useState('Gryffindor')
+	// setName('Dusty')
+	// this.setState({name: 'Dusty'})
 
-  // setName('Dusty')
-  // this.setState({name: 'Dusty'})
-  
-//----------------------------------------------------
+	//----------------------------------------------------
 	// Class methods to update state
+
+	toggleItem = id => {
+		// find the item we clicked on
+		// toggle the purchased field
+		// update state with the new grocery data
+		const newGroceryList = this.state.groceryList.map(item => {
+			// return 1; // => [1, 1, 1, 1, 1, 1,]
+			if (item.id === id) {
+				return {
+					...item,
+					// ^^Sends all of the properties from that item
+					purchased : !item.purchased,
+				};
+			}
+			else {
+				return item;
+			}
+		});
+		// update groceryList
+		this.setState({
+			groceryList : newGroceryList,
+		});
+	};
 
 	//render - comparable to a function component's return
 	// render is in charge of ... rendering JSX!
 
 	render () {
 		console.log('rendering...');
+		const sortedList = this.state.groceryList.sort((a, b) => a.purchased - b.purchased);
 		return (
 			<div className='App'>
 				<div className='header'>
 					<h1>Shopping List</h1>
 					<ListForm />
 				</div>
-				<GroceryList groceries={this.state.groceryList} />
+				<GroceryList groceries={sortedList} toggleItem={this.toggleItem} />
 			</div>
 		);
 	}
