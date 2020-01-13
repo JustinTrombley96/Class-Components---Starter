@@ -19,3 +19,5 @@ class ListForm extends React.Component {
     );
   }
 }
+
+export default ListForm

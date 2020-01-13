@@ -1,5 +1,4 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, {Component, useState}from 'react';
 
 import GroceryList from './components/GroceryList';
 import ListForm from './components/ListForm';
@@ -38,7 +37,7 @@ const groceries = [
   }
 ];
 
-class App extends React.Component {
+class App extends Component {
   // Constructor with state
 
   // Class methods to update state
@@ -57,4 +56,4 @@ class App extends React.Component {
   }
 }
 
-
+export default App
