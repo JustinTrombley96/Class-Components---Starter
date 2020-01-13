@@ -57,7 +57,8 @@ class App extends Component {
 	// this.setState({name: 'Dusty'})
 
 	//----------------------------------------------------
-	// Class methods to update state
+  // Class methods to update state
+  // Arrow function implicity bind the "this" keyword to the function
 
 	toggleItem = id => {
 		// find the item we clicked on
@@ -80,7 +81,18 @@ class App extends Component {
 		this.setState({
 			groceryList : newGroceryList,
 		});
-	};
+  };
+  
+  addItem = itemName => {
+    const newItem = {
+      name: itemName,
+      id: Date.now(),
+      purchased: false
+    }
+    this.setState({
+      groceryList: [...this.state.groceryList, newItem]
+    })
+  }
 
 	//render - comparable to a function component's return
 	// render is in charge of ... rendering JSX!
@@ -92,7 +104,7 @@ class App extends Component {
 			<div className='App'>
 				<div className='header'>
 					<h1>Shopping List</h1>
-					<ListForm />
+					<ListForm addItem={this.addItem}/>
 				</div>
 				<GroceryList groceries={sortedList} toggleItem={this.toggleItem} />
 			</div>
